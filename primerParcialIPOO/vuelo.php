@@ -22,8 +22,8 @@ class Vuelo{
             $this->importe = $importe;
             $this->fecha = $fecha;
             $this->destino = $destino;
-            $this->$horaArribo = $horaArribo;
-            $this->$horaPartida = $horaPartida;
+            $this->horaArribo = $horaArribo;
+            $this->horaPartida = $horaPartida;
             $this->cantAsientosTotal = $cantAsientosTotal;
             $this->AsientosDisponibles = $AsientosDisponibles;
             $this->refPersona = $refPersona;
@@ -134,4 +134,16 @@ class Vuelo{
             return $disponibles;
         }
         
+
+
+    public function __toString() {
+        return "Vuelo N°: " . $this->getNumero() . "\n" .
+                "Fecha: " . $this->getFecha() . "\n" .
+                "Destino: " . $this->getDestino() . "\n" .
+                "Hora de Partida: " . $this->getHoraPartida() . "\n" .
+                "Hora de Arribo: " . $this->getHoraArribo() . "\n" .
+                "Asientos Disponibles: " . $this->getAsientosDisponibles() . "/" . $this->getCantAsientosTotal() . "\n" .
+                "Importe: $" . $this->getImporte() . "\n" .
+                "Persona Responsable: " . $this->getRefPersona();
+    }
 }    
