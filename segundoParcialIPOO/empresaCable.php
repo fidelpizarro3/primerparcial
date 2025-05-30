@@ -142,13 +142,11 @@ public function incorporarContrato($plan, $cliente, $fechaInicio, $fechaVencimie
     $i = 0;
     $encontroActivo = false;
 
-    // veo si hay algun contrato activo
     while ($i < count($contratos) && !$encontroActivo) {
         $contrato = $contratos[$i];
         $clienteContrato = $contrato->getObjCliente();
 
-        if ($clienteContrato->getTipoDoc() == $cliente->getTipoDoc() &&$clienteContrato->getNumDoc() == $cliente->getNumDoc() &&$contrato->getEstado() == "activo") {
-            // doy de baja el contrato anteriorr
+        if ($clienteContrato->getTipoDoc() == $cliente->getTipoDoc() && $clienteContrato->getNumDoc() == $cliente->getNumDoc() && $contrato->getEstado() == "activo") {
             $contrato->setEstado("baja");
             $encontroActivo = true;
         }
@@ -156,8 +154,6 @@ public function incorporarContrato($plan, $cliente, $fechaInicio, $fechaVencimie
     }
 
     $codigoContrato = count($contratos) + 1;
-
-    // se crea un nuevo contrato
     $estado = "activo";
     $costo = $plan->getImporte();
     $renovacion = true;
@@ -165,13 +161,15 @@ public function incorporarContrato($plan, $cliente, $fechaInicio, $fechaVencimie
     if ($esWeb) {
         $nuevoContrato = new ContratoWeb($codigoContrato,10, 500, $fechaInicio, $fechaVencimiento, $plan, $estado, $costo, $renovacion, $cliente);
     } else {
-        $nuevoContrato = new Contrato($codigoContrato,$fechaInicio, $fechaVencimiento, $plan, $estado, $costo, $renovacion, $cliente);
+        $nuevoContrato = new Contrato($codigoContrato, $fechaInicio, $fechaVencimiento, $plan, $estado, $costo, $renovacion, $cliente);
     }
 
-    // se agrega el nuevo contrato a la coleccion
     $contratos[] = $nuevoContrato;
     $this->setContratos($contratos);
+
+    return $nuevoContrato; 
 }
+
 
 
 public function  retornarPromImporteContratos($codigoPlan){

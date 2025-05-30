@@ -42,3 +42,7 @@ $fechaVto = date('Y-m-d', strtotime('+30 days'));
 $contrato1 = $empresa->incorporarContrato($plan1, $cliente, $fechaHoy, $fechaVto, false);
 $contrato2 = $empresa->incorporarContrato($plan2, $cliente, $fechaHoy, $fechaVto, true);
 $contrato3 = $empresa->incorporarContrato($plan1, $cliente, $fechaHoy, $fechaVto, true);
+
+echo "Importe contrato 1: $" . $contrato1->calcularImporte() . "\n";
+echo "Importe contrato 2: $" . $contrato2->calcularImporte() . "\n";
+echo "Importe contrato 3: $" . $contrato3->calcularImporte() . "\n";
